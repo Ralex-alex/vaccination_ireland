@@ -6,7 +6,7 @@ package vaccinationProgram;
 
 /**
  *
- * @author rambre
+ * @author Alexandru Rusu x21331013
  */
 public class Patients {
     

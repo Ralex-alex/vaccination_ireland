@@ -6,12 +6,13 @@ package vaccinationProgram;
 
 /**
  *
- * @author rambre
+ * @author Alexandru Rusu x21331013
  */
-public class vaccinationIrelandApp {
+public class vaccinationIrelandApp {                                                                                            //This code is part of a vaccination program for Ireland. It creates a graphical user interface (GUI) for the program and sets it to be visible. 
+                                                                                                                                //The code is written in Java and is part of a larger program. The key functionality of this code is to create the GUI and make it visible.
 
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments                                   
      */
     public static void main(String[] args) {
         // TODO code application logic here

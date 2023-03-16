@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author rambre
+ * @author Alexandru Rusu x21331013
  */
 public class PrioQueue implements PrioQInterface {
     
@@ -112,3 +112,7 @@ public class PrioQueue implements PrioQInterface {
     }
     
 }
+
+//This code implements a priority queue data structure, which is used to store and organize objects based on their priority. 
+//The code includes methods to enqueue objects, dequeue objects, check the priority of objects, and print the contents of the queue. 
+//The priority of objects is determined by their age and a conditionY parameter. The queue is implemented using an ArrayList, and objects are inserted into the queue in the correct position based on their priority.

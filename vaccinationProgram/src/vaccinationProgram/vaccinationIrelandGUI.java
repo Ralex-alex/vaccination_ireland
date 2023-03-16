@@ -6,7 +6,7 @@ package vaccinationProgram;
 
 /**
  *
- * @author rambre
+ * @author Alexandru Rusu x21331013
  */
 public class vaccinationIrelandGUI extends javax.swing.JFrame {
     
@@ -53,8 +53,8 @@ public class vaccinationIrelandGUI extends javax.swing.JFrame {
 
         addButton.setText("Add Patient");
         addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+            public void actionPerformed(java.awt.event.ActionEvent evt) {           //This code is part of a vaccination program for Dublin Hospital. It creates a GUI for the program and implements a                                                                      
+                addButtonActionPerformed(evt);                                      //The GUI allows users to add patient information (name, age, and condition) to the queue, check the priority/patient information in the queue, and vaccinate the patient at the top of the queue.
             }
         });
 
@@ -154,55 +154,66 @@ public class vaccinationIrelandGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-        if(!nameText.getText().isEmpty() || !ageText.getText().isEmpty() || !conditionText.getText().isEmpty()){
-            
-            String vCondition = conditionText.getText();
-            String vName = nameText.getText();
-            int vAge = Integer.parseInt(ageText.getText());
-            Patients addPatient = new Patients();
-            addPatient.setprioName(vName);
-            addPatient.setpatAge(vAge);
-            addPatient.setpatCondition(vCondition);
-            Queue.enqueue(vAge, addPatient,vCondition);
-            jTextArea1.append("Patient has been added to list \n Name :"+vName+" and Age : "+vAge+"\n");
-        }
-        else{
-            jTextArea1.append("No patient data found");
-        }
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed       /*From here on its validation and the button pressed and their functions  */
+      // TODO add your handling code here:
+if(!nameText.getText().isEmpty() && !ageText.getText().isEmpty() && !conditionText.getText().isEmpty()){
+  String vCondition = conditionText.getText().toUpperCase();
+  String vName = nameText.getText();
+  int vAge = 0;
+  if (vName.matches("[a-zA-Z]+")) {
+      try {
+          vAge = Integer.parseInt(ageText.getText());
+      } catch (NumberFormatException e) {
+          jTextArea1.append("Please enter a valid age");
+          return;
+      }
+      if (vCondition.equals("Y") || vCondition.equals("N")) {
+          Patients addPatient = new Patients();
+          addPatient.setprioName(vName);
+          addPatient.setpatAge(vAge);
+          addPatient.setpatCondition(vCondition);
+          Queue.enqueue(vAge, addPatient,vCondition);
+          jTextArea1.append("\n Patient has been added to list \n Name:" +vName+" and Age : "+vAge+"\n");
+      } else {
+          jTextArea1.append("\n Please enter a valid condition (Y/N)");
+      }
+  } else {
+      jTextArea1.append("\n Please enter a valid name");
+  }
+}
+else{
+  jTextArea1.append("Please fill out with the correct Name, Age or Condition \n ");
+}
 
-        nameText.setText("");
-        ageText.setText("");
-        conditionText.setText("");
+nameText.setText("");
+ageText.setText("");
+conditionText.setText("");
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void waitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waitBtnActionPerformed
-        // TODO add your handling code here:
-        if(!Queue.isEmpty()){
-            
-            jTextArea1.append("\nPatients that are waiting : \n"+Queue.printPrioQueue());
-        }
-        else{
-            jTextArea1.append("\n No Patients Found.");
-        }
+     // TODO add your handling code here:
+if(!Queue.isEmpty()){
+  
+  jTextArea1.append("\nPatients that are waiting : \n"+Queue.printPrioQueue());
+}
+else{
+  jTextArea1.append("\n No Patients Found. \n");
+}
     }//GEN-LAST:event_waitBtnActionPerformed
 
     private void dequeuebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dequeuebtnActionPerformed
         // TODO add your handling code here:
-         
-            if(!Queue.isEmpty()){
-                PrioQElement remove1 = (PrioQElement)Queue.dequeue();
-                Patients person1 = (Patients)remove1.getPatient();
-        
-                jTextArea1.append("\nHighest priority patient is done. Next in line is \n"+Queue.printPrioQueue());
-            }
-            else{
-               
-                jTextArea1.append("The Patients list is empty.");
-            }
-           
-        
+
+if(!Queue.isEmpty()){
+  PrioQElement remove1 = (PrioQElement)Queue.dequeue();
+  Patients person1 = (Patients)remove1.getPatient();
+
+  jTextArea1.append("\nHighest priority patients are done. Next in line is \n "+Queue.printPrioQueue());
+}
+else{
+ 
+  jTextArea1.append("The Patients list is empty.\n");
+}
     }//GEN-LAST:event_dequeuebtnActionPerformed
 
     /**
